@@ -7,6 +7,8 @@ const { createSSRApp } = require('vue');
 import { renderToString } from '@vue/server-renderer';
 import fs from 'fs';
 import path from 'path';
+// const Home = require ('./views/components/Home.vue');
+
 
 dotenv.config();
 const app: Application = express();
