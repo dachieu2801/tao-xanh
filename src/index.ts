@@ -3,8 +3,6 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import connectDB from './shared/database/database';
 import route from './routes/index';
-const { createSSRApp } = require('vue');
-import { renderToString } from '@vue/server-renderer';
 import fs from 'fs';
 import path from 'path';
 // const Home = require ('./views/components/Home.vue');
@@ -19,28 +17,11 @@ connectDB();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Định nghĩa route cho Vue SSR
-app.get('/', (req, res) => {
-  const app = createSSRApp({
-    data: () => ({ count: 1 }),
-    template: `<button @click="count++">{{ count }}</button>`
-  })
+// Cấu hình EJS là engine template
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-  renderToString(app).then((html) => {
-    res.send(`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Vue SSR Example</title>
-      </head>
-      <body>
-        <div id="app">${html}</div>
-      </body>
-    </html>
-    `)
-  })
-})
-// Định nghĩa route khác
+// Định nghĩa một route
 route(app);
 
 app.listen(port, () => {

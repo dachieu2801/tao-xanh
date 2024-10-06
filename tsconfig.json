@@ -11,10 +11,6 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "allowJs": true,
-    "types": [
-      "vue",
-      "vue-router"
-    ],
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
